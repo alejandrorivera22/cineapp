@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">   
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Listado de Horarios</title>
+  
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/theme.css}" rel="stylesheet">
+    
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+
+    <div class="container theme-showcase" role="main">
+
+      <h3>Listado de Horarios</h3>
+      
+      <a th:href="@{/horarios/create}" class="btn btn-success" role="button" title="Nueva Horario" >Nuevo</a><br><br>
+      <div th:if="${msg != null}" class="alert alert-success" role="alert" th:text="${msg}"></div>
+      <div class="table-responsive">
+        <table class="table table-hover table-striped table-bordered">
+            <tr>
+                <th>Pelicula</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Sala</th>
+                <th>Precio</th>
+                <th>Opciones</th>
+            </tr>
+            <tr th:each="horario : ${horarios}">
+                <td th:text="${horario.pelicula.titulo}">titulo</td>
+                <td th:text="${#dates.format(horario.fecha, 'dd-MMM-yyyy')}">fecha</td>
+                <td th:text="${horario.hora}">hora</td>
+                <td th:text="${horario.sala}">sala</td>
+                <td th:text="${horario.precio}">precio</td>              
+                <td>
+					        <a th:href="@{/horarios/edit/{id}(id=${horario.id})}" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
+					        <a th:href="@{/horarios/delete/{id}(id=${horario.id})}" onclick=' return confirm("¿estas seguro?") ' class="btn btn-danger btn-sm" role="button" title="Delete" ><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+          </tr>
+        </table>
+      </div>
+
+      <nav th:if="${horarios.totalPages > 0}" aria-label="Page navigation example" >
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${horarios.number == 0 ? 'disabled' : ''}">
+                <a th:href="@{/horarios/index(page=${horarios.number - 1})}" class="page-link">Anterior</a>
+            </li>
+                        
+            <li class="page-item" th:classappend="${i eq horarios.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, horarios.totalPages, 1)}">
+                <a class="page-link" th:href="@{/horarios/index?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+            </li>
+            <li class="page-item" th:classappend="${horarios.number == (horarios.totalPages - 1) ? 'disabled' : ''}">
+                <a th:href="@{/horarios/index(page=${horarios.number + 1})}" class="page-link">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+
+      <hr class="featurette-divider">
+
+      <!-- FOOTER -->
+      <footer th:insert="~{fragments/footer :: footer}">
+
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script> 
+
+  </body>
+</html>

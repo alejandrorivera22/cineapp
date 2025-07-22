@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Listado de Noticias</title>
+    
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/theme.css}" rel="stylesheet">
+    
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <header th:insert="~{fragments/menu :: menu-principal}"></header>
+    
+
+    <div class="container theme-showcase" role="main">
+
+      <h3>Listado de Noticias</h3>
+      
+      <a th:href="@{/noticias/create}" class="btn btn-success" role="button" title="Nueva Pelicula" >Nueva</a><br><br>
+
+      <div th:if="${msg} != null" class="alert alert-success" role="alert" th:text="${msg}"></div>
+
+      <div class="table-responsive">
+        <table class="table table-hover table-striped table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Fecha</th>              
+                <th>Estatus</th>              
+                <th>Opciones</th>              
+            </tr>
+            <tr th:each="noticia : ${noticias}">
+                <td th:text="${noticia.id}">1</td>
+                <td th:text="${noticia.titulo}">Noticia 1</td>
+                <td th:text="${#dates.format(noticia.fecha, 'dd-MM-yyyy')}">2017-05-05</td>              
+                <td>
+                  <span th:classappend="${noticia.estatus} == 'Activa' ? 'label label-success' : 'label label-danger'" th:text="${noticia.estatus}"></span>
+                  <!-- <span class="label label-success" th:text="${noticia.estatus}">estatus</span> -->
+                </td>
+                <td>
+                    <a th:href="@{/noticias/edit/{id}(id=${noticia.id})}" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a th:href="@{/noticias/delete/{id}(id=${noticia.id})}" onclick=' return confirm("¿estas seguro?") ' class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>   
+        </table>
+      </div>  
+      <hr class="featurette-divider">
+
+      <!-- FOOTER -->
+      <footer th:insert="~{fragments/footer :: footer}">
+
+      </footer>
+  
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>     
+  </body>
+</html>

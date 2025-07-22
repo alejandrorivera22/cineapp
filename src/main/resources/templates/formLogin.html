@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">    
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Login</title>
+
+		<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">    
+		<link th:href="@{/bootstrap/css/theme.css}" rel="stylesheet">
+		<link th:href="@{/bootstrap/css/signin.css}" rel="stylesheet">
+
+	</head>
+
+	<body>
+
+		<!-- Fixed navbar -->
+		<header th:insert="~{fragments/menu :: menu-principal}"></header>
+			
+
+		<div class="container theme-showcase" role="main">
+			<hr class="featurette-divider">
+			<img th:src="@{/images/login.png}" width="136" height="136" class="center">
+
+			<div th:if="${param.error != null}">
+				<img th:src="@{/images/error.png}" width="48" height="48" class="center">
+				<h4 class="form-signin-heading" style="color: red; text-align: center;">Usuario / Password incorrectos!</h4>
+			</div>
+
+			<form class="form-signin" th:action="@{/login}" method="post">        
+				<h3 class="form-signin-heading">CineSite | Administracion</h3>        
+				<label for="username" class="sr-only">Usuario</label>
+				<input type="text" id="username" name="username" class="form-control" placeholder="Usuario" required autofocus>
+				<label for="password" class="sr-only">Contraseña</label>
+				<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+				<!-- <p class="text-primary" style="font-size: small">¿Todavía no estas registrado? <a th:href="@{/signup}">Regístrate</a></p> -->
+			</form>
+
+		</div> <!-- /container -->
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script th:src="@{/bootstrap/js/bootstrap.min.js}" ></script>
+	</body>
+</html>

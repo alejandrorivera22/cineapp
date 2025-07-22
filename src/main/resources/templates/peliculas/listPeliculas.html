@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Listado de Peliculas</title>
+
+    <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/bootstrap/css/theme.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Fixed navbar -->
+<header th:insert="~{fragments/menu :: menu-principal}"></header>
+
+<div class="container theme-showcase" role="main">
+
+    <h3>Listado de Peliculas</h3>
+    <div th:if="${msg != null} "th:text="${msg}" class="alert alert-success" role="alert"></div>
+
+    <a th:href="@{/peliculas/create}" class="btn btn-success" role="button" title="Nueva Pelicula" >Nueva</a><br><br>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped table-bordered">
+            <tr>
+                <th>Titulo</th>
+                <th>Genero</th>
+                <th>Clasificacion</th>
+                <th>Duracion</th>
+                <th>Fecha Estreno</th>
+                <th>Estatus</th>
+                <th>Opciones</th>
+            </tr>
+            <tr th:each="pelicula : ${peliculas}">
+                <td th:text="${pelicula.titulo}">titulo</td>
+                <td th:text="${pelicula.genero}">genero</td>
+                <td th:text="${pelicula.clasificacion}">clasificacion</td>
+                <td th:text="${pelicula.duracion}">duracion</td>
+                <td  th:text="${#dates.format(pelicula.fechaEstreno, 'dd-MM-yyyy')}">2017-05-05</td>
+                <td>
+                    <span th:if="${pelicula.estatus == 'Activa'}" class="label label-success">Activa</span>
+                    <span th:if="${pelicula.estatus != 'Activa'}" class="label label-danger">Inavtiva</span>
+                </td>
+                <td>
+                    <a th:href="@{/peliculas/edit/{id}(id=${pelicula.id})}" class="btn btn-success btn-sm" role="button" title="Edit" ><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a th:href="@{/peliculas/delete/{id}(id=${pelicula.id})}" onclick=' return confirm("¿estas seguro?") ' class="btn btn-danger btn-sm" role="button" title="Eliminar" ><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <hr class="featurette-divider">
+
+    <nav th:if="${peliculas.totalPages > 0}" aria-label="Page navigation example" >
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${peliculas.number == 0 ? 'disabled' : ''}">
+                <a th:href="@{/peliculas/index(page=${peliculas.number - 1})}" class="page-link">Anterior</a>
+            </li>
+                        
+            <li class="page-item" th:classappend="${i eq peliculas.number + 1} ? 'active'" th:each="i : ${#numbers.sequence( 1, peliculas.totalPages, 1)}">
+                <a class="page-link" th:href="@{/peliculas/index?page={tmpPag} (tmpPag=${i-1}) }" th:text="${i}" th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+            </li>
+            <li class="page-item" th:classappend="${peliculas.number == (peliculas.totalPages - 1) ? 'disabled' : ''}">
+                <a th:href="@{/peliculas/index(page=${peliculas.number + 1})}" class="page-link">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- FOOTER -->
+    <footer th:insert="~{fragments/footer :: footer}"></footer>
+
+</div> <!-- /container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

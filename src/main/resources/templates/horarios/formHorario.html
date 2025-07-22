@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">    
+		<meta name="author" content="">
+		<title>Creacion de Horarios</title>
+
+		<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">    
+		<link th:href="@{/bootstrap/css/theme.css}" rel="stylesheet">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	</head>
+
+	<body>
+
+		<!-- Fixed navbar -->
+		<header th:insert="~{fragments/menu :: menu-principal}"></header>
+		
+
+		<div class="container theme-showcase" role="main">
+
+			<h3 class="blog-title"><span class="label label-success">Datos del Horario</span></h3>  
+
+			<form th:action="@{/horarios/save}" method="post" th:object="${horario}">
+				<div class="row">         
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="id_pelicula" class="control-label">Pelicula</label>  
+							<input type="hidden" th:field="*{id}" />      
+							<select id="id_pelicula"  th:field="*{pelicula.id}" class="form-control">
+								<option th:each="pelicula : ${peliculas}" th:value="${pelicula.id}" th:text="${pelicula.titulo}"></option>         
+							</select>             
+						</div> 
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="fecha">Fecha</label>             
+							<input type="text" class="form-control" th:field="*{fecha}" id="fecha" th:errorclass="'form-control alert-danger'"/>
+						</div>  
+						<div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"  class="form-text text-danger"></div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="hora">Hora</label>
+							<input type="text" class="form-control" th:field="*{hora}" id="hora" placeholder="Formato: HH:mm Ejemplo 21:30" th:errorclass="'form-control alert-danger'" />
+						</div>  
+						<div th:if="${#fields.hasErrors('hora')}" th:errors="*{hora}"  class="form-text text-danger"></div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="sala" class="control-label">Sala</label>              
+							<select id="sala" name="sala" class="form-control">
+								<option th:field="*{sala}" value="Premium">Sala Premium</option>
+								<option th:field="*{sala}" value="Sala 1">Sala 1</option>
+								<option th:field="*{sala}" value="Sala 2">Sala 2</option>
+								<option th:field="*{sala}" value="Sala 3">Sala 3</option>                
+							</select>             
+						</div> 
+					</div>
+
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="precio">Precio</label>
+							<input type="text" class="form-control" th:field="*{precio}" id="precio" required="required" th:errorclass="'form-control alert-danger'"/>
+						</div>  
+						<div th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"  class="form-text text-danger"></div>
+					</div>
+
+				</div>
+
+				<button type="submit" class="btn btn-danger" >Guardar</button>
+			</form> 
+
+			<hr class="featurette-divider">
+
+			<!-- FOOTER -->
+			<footer th:insert="~{fragments/footer :: footer}"></footer>
+
+		</div> <!-- /container -->
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+		<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script> 
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(function () {
+            $("#fecha").datepicker({dateFormat: 'dd-mm-yy'});
+        }
+      );
+    </script>
+	</body>
+</html>
+

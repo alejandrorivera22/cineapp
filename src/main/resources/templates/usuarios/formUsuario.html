@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">    
+		<meta name="author" content="">
+		<title>Creacion de Usuarios</title>
+		<link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet">    
+		<link th:href="@{/bootstrap/css/theme.css}" rel="stylesheet">
+	</head>
+
+	<body>
+
+		<!-- Fixed navbar -->
+        <header th:insert="~{fragments/menu :: menu-principal}"></header>
+		
+
+		<div class="container theme-showcase" role="main">
+
+			<h3 class="blog-title"><span class="label label-success">Datos del Usuario</span></h3>  
+
+			<form th:action="@{/usuarios/save}" method="post" th:object="${usuario}">
+				<div class="row">         
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="perfil" class="control-label">Perfil</label>              
+							<select id="perfil" name="perfil" class="form-control">
+								<option value="EDITOR">EDITOR</option>
+								<option value="GERENTE">GERENTE</option>								
+							</select>             
+						</div> 
+					</div>
+				</div>	
+				<div class="row"> 	
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="cuenta">Cuenta</label>             
+							<input type="text" class="form-control" th:field="*{cuenta}" id="cuenta" required="required"/>
+						</div>  
+					</div>
+					
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="pwd">Password</label>  
+							<input type="password" class="form-control"  th:field="*{pwd}" id="pwd" required="required"/>
+						</div>  
+					</div>
+					
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="email">Email</label>
+							<input type="email" class="form-control" th:field="*{email}" id="email" placeholder="Correo electrónico" required="required"/>
+						</div>  
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="telefono">Teléfono</label>
+							<input type="text" class="form-control" th:field="*{telefono}" id="telefono" required="required"/>
+						</div>  
+					</div>
+
+				</div>
+
+				<button type="submit" class="btn btn-danger" >Guardar</button>
+			</form> 
+
+			<hr class="featurette-divider">
+
+			<!-- FOOTER -->
+            <footer th:insert="~{fragments/footer :: footer}"></footer>
+	
+
+		</div> <!-- /container -->
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+		<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>    
+	</body>
+</html>
