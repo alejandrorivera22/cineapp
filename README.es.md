@@ -46,7 +46,7 @@ de una interfaz web.
 ##  Validaciones y Reglas
 ### Ejemplos
 
--  **Acceso restringido** for protected routes
+-  **Acceso restringido** rutas protegidas
 -  **Peliculas activas** Solo se muestran películas activas al público
 -  **Horarios** Filtrado de horarios por fecha y película
 -  **Lista de géneros** Lista de géneros predefinida para consistencia
