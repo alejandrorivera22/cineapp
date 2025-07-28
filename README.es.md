@@ -93,7 +93,7 @@ cd cineapp
   **ciena.ruta.images=/home/youruser/cineapp/images/**
 
 ### 4. Copiar imágenes de ejemplo
-- **IMPORTANTE:** Debes copiar estas imágenes en la carpeta que definiste
+- **IMPORTANTE:** Debes copiar las imágenes que se encuentran en resources/images en la carpeta que definiste
 en ciena.ruta.images para que la aplicación pueda mostrarlas 
 correctamente en tiempo de ejecución.
 
