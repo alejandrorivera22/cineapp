@@ -95,7 +95,7 @@ cd cineapp
   **ciena.ruta.images=/home/youruser/cineapp/images/**
 
 ### 4. Sample Images
-- **Important:** You must copy these images into the folder you defined in ciena.ruta.images
+- **Important:** You must copy the images located in resources/images into the folder you defined in ciena.ruta.images
   so the application can display them correctly at runtime.
 
 ### 5. Start MySQL
