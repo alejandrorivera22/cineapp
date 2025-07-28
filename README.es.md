@@ -58,10 +58,11 @@ de una interfaz web.
 ## Estructura del proyecto
 
 - controllers/     — Controladores web (manejan vistas y rutas)
-- config/          — Configuración general (seguridad, propiedades, etc.)
-- domain/          — Entidades y repositorios JPA
-- infrastructure/  —  Interfaces y lógica de negocio
-- resources/       —  Archivos de configuración (application.properties, etc.)
+- config/          — Configuración general (propiedades, etc.)
+- models/          — Entidades 
+- repositories/    — repositorios JPA
+- security/        — configuracion de seguridad
+- service/         — logica de negocio
 - templates/       — Plantillas HTML Thymeleaf
 - static/          — Recursos estáticos (CSS, JS, imágenes)
 - util/            — Utilidades (roles, validadores, helpers)
